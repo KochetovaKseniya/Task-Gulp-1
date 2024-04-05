@@ -9,7 +9,7 @@ const uglify = require('gulp-uglify');
 
 gulp.task("styles", function () {
     return gulp
-      .src("src-green-2023/scss/**/*.+(scss|sass)")
+      .src("src/scss/**/*.+(scss|sass)")
       .pipe(sass({ outputStyle: "compressed" }).on("error", sass.logError))
       .pipe(rename({ suffix: ".min", prefix: "" }))
       .pipe(autoprefixer())
@@ -19,15 +19,15 @@ gulp.task("styles", function () {
 
 gulp.task('scripts', function() {
     return gulp
-      .src(['src-green-2023/js/*.js'])
+      .src(['src/js/*.js'])
       .pipe(rename({ suffix: ".min", prefix: "" }))
       .pipe(uglify())
       .pipe(gulp.dest('assets-green-2023/min-js'));
 });
 
 gulp.task("watch", function () {
-  gulp.watch("src-green-2023/scss/**/*.+(scss|sass|css)", gulp.parallel("styles"));
-  gulp.watch('src-green-2023/js/*.js', gulp.series("scripts"));
+  gulp.watch("src/scss/**/*.+(scss|sass|css)", gulp.parallel("styles"));
+  gulp.watch('src/js/*.js', gulp.series("scripts"));
 });
 
 gulp.task("default", gulp.parallel("styles", "scripts", "watch"));
